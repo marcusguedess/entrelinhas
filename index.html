@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self' blob:; manifest-src 'self'; worker-src 'self'; form-action 'self'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2f241f" />
+    <meta
+      name="description"
+      content="Entrelinhas é uma estante inteligente de audiobooks para ouvir, importar arquivos, salvar progresso e criar marcadores. Dom Casmurro é a obra demonstrativa hospedada pelo projeto."
+    />
+    <title>Entrelinhas — Estante inteligente de audiobooks</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./imagens/dom-casmurro.jpeg" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#player">Pular para o player</a>
+
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Página inicial">Entrelinhas</a>
+      <div class="header-actions" aria-label="Preferências do aplicativo">
+        <button id="theme-toggle" class="icon-toggle" type="button" aria-label="Ativar modo noturno" aria-pressed="false">
+          <span aria-hidden="true">☾</span>
+        </button>
+        <button id="install-app" class="button button-secondary" hidden>Instalar aplicativo</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="app-title">
+        <div class="cover-wrap">
+          <img
+            id="cover"
+            src="./imagens/dom-casmurro.jpeg"
+            alt="Capa de Dom Casmurro"
+            width="360"
+            height="520"
+          />
+        </div>
+
+        <div class="hero-copy">
+          <p class="status-pill">Projeto gratuito em desenvolvimento</p>
+          <p class="eyebrow">Estante inteligente de audiobooks</p>
+          <h1 id="app-title">Entrelinhas</h1>
+          <p class="author">Ouça, organize e continue seus audiobooks no ponto exato.</p>
+          <p class="summary">
+            O Entrelinhas é um aplicativo web para receber audiobooks, reproduzir seções,
+            salvar progresso automaticamente e guardar marcadores. Para demonstrar a experiência,
+            hospedamos uma amostra de <strong>Dom Casmurro</strong> pronta para escuta.
+          </p>
+          <p class="signature">Experiência criada por <strong>Marcus Guedes</strong></p>
+          <div class="feature-list" aria-label="Recursos principais">
+            <span>Importe seus áudios</span><span>Progresso local</span><span>Marcadores</span><span>Modo offline</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-app" aria-labelledby="about-title">
+        <div>
+          <p class="eyebrow">O que é</p>
+          <h2 id="about-title">Uma central para audiobooks, não apenas um livro hospedado.</h2>
+        </div>
+        <div class="about-grid">
+          <article>
+            <h3>1. Experimente a amostra</h3>
+            <p>Use Dom Casmurro para testar o player, os controles, a transcrição e os marcadores.</p>
+          </article>
+          <article>
+            <h3>2. Importe sua biblioteca</h3>
+            <p>Adicione arquivos de áudio do seu dispositivo. Eles ficam salvos localmente no navegador.</p>
+          </article>
+          <article>
+            <h3>3. Continue entre sessões</h3>
+            <p>O app lembra seção, posição, velocidade, volume e anotações sem exigir conta.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="player" class="player-card" aria-labelledby="chapter-title">
+        <p class="demo-label">Demonstração hospedada: Dom Casmurro, de Machado de Assis</p>
+        <audio id="audio" preload="metadata"></audio>
+
+        <div class="now-playing">
+          <div>
+            <p class="eyebrow">Reproduzindo agora</p>
+            <h2 id="chapter-title">Carregando seções…</h2>
+          </div>
+          <div class="playback-meta">
+            <p id="player-status" class="status" role="status" aria-live="polite"></p>
+            <p id="listening-time" class="listening-time">Tempo ouvido: 0 min</p>
+          </div>
+        </div>
+
+        <div class="section-dashboard" aria-label="Resumo da seção atual">
+          <div>
+            <span class="metric-label">Seção</span>
+            <strong id="section-position">-- de --</strong>
+          </div>
+          <div>
+            <span class="metric-label">Conteúdo</span>
+            <strong id="section-range">Carregando</strong>
+          </div>
+          <div>
+            <span class="metric-label">Retomada</span>
+            <strong id="resume-point">0:00</strong>
+          </div>
+          <div>
+            <span class="metric-label">Duração</span>
+            <strong id="section-duration">--</strong>
+          </div>
+          <div>
+            <span class="metric-label">Transcrição</span>
+            <strong id="transcript-state">Carregando</strong>
+          </div>
+        </div>
+
+        <div id="sound-visual" class="sound-visual" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="progress-group">
+          <input
+            id="progress"
+            class="progress"
+            type="range"
+            min="0"
+            max="100"
+            value="0"
+            step="0.1"
+            aria-label="Posição da reprodução"
+          />
+          <div class="time-row" aria-live="off">
+            <span id="current-time">0:00</span>
+            <span id="duration">0:00</span>
+          </div>
+        </div>
+
+        <div class="player-controls" aria-label="Controles de reprodução">
+          <button id="previous" class="icon-button" aria-label="Seção anterior">⏮</button>
+          <button id="backward" class="icon-button" aria-label="Voltar 15 segundos">−15</button>
+          <button id="play" class="play-button" aria-label="Reproduzir" aria-pressed="false">▶</button>
+          <button id="forward" class="icon-button" aria-label="Avançar 15 segundos">+15</button>
+          <button id="next" class="icon-button" aria-label="Próxima seção">⏭</button>
+        </div>
+
+        <div class="player-options">
+          <label for="speed">Velocidade</label>
+          <select id="speed">
+            <option value="0.75">0,75×</option>
+            <option value="1" selected>1×</option>
+            <option value="1.25">1,25×</option>
+            <option value="1.5">1,5×</option>
+            <option value="2">2×</option>
+          </select>
+          <label class="volume-control" for="volume">
+            <span id="volume-label">Volume 100%</span>
+            <input id="volume" type="range" min="0" max="1" value="1" step="0.05" />
+          </label>
+          <button id="mute" class="button button-secondary" aria-pressed="false">Silenciar</button>
+          <button id="download" class="button button-secondary">Salvar para ouvir offline</button>
+          <button id="focus-mode" class="button button-secondary" aria-pressed="false">Modo escuta</button>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel import-panel" aria-labelledby="import-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Sua biblioteca</p>
+              <h2 id="import-title">Adicione seu audiobook ao Entrelinhas</h2>
+            </div>
+          </div>
+          <p class="panel-intro">
+            Selecione seções em áudio do seu dispositivo para transformar o navegador em uma estante de escuta privada.
+            Os arquivos não são enviados para servidor.
+          </p>
+          <form id="library-form" class="library-form">
+            <label for="library-title">Título</label>
+            <input id="library-title" maxlength="80" placeholder="Ex.: Meu audiobook" />
+            <label for="library-author">Autor ou narrador</label>
+            <input id="library-author" maxlength="80" placeholder="Opcional" />
+            <label for="library-files">Áudios e transcrições</label>
+            <input id="library-files" type="file" accept="audio/*,.vtt,.md,text/vtt,text/markdown,text/plain" multiple />
+            <button class="button button-primary" type="submit">Adicionar à biblioteca local</button>
+          </form>
+          <p class="privacy-note">
+            Os arquivos importados ficam neste dispositivo. Nada é enviado para servidor.
+          </p>
+        </section>
+
+        <section class="panel" aria-labelledby="chapters-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Navegação</p>
+              <h2 id="chapters-title">Seções</h2>
+            </div>
+            <span id="completion" class="completion">0% concluído</span>
+          </div>
+          <ol id="chapter-list" class="chapter-list"></ol>
+        </section>
+
+        <section class="panel" aria-labelledby="transcript-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Acompanhe o texto</p>
+              <h2 id="transcript-title">Transcrição</h2>
+            </div>
+            <label class="transcript-search" for="transcript-search">
+              <span>Buscar</span>
+              <input id="transcript-search" type="search" placeholder="Palavra ou trecho" autocomplete="off" />
+            </label>
+          </div>
+          <div id="transcript" class="transcript" tabindex="0"></div>
+        </section>
+      </div>
+
+      <section class="panel bookmarks-panel" aria-labelledby="bookmarks-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Sua leitura</p>
+            <h2 id="bookmarks-title">Marcadores</h2>
+          </div>
+        </div>
+        <form id="bookmark-form" class="bookmark-form">
+          <label for="bookmark-note">Anotação</label>
+          <input
+            id="bookmark-note"
+            maxlength="120"
+            autocomplete="off"
+            placeholder="O que chamou sua atenção?"
+          />
+          <button class="button button-primary" type="submit">Adicionar marcador</button>
+        </form>
+        <ul id="bookmark-list" class="bookmark-list"></ul>
+        <div class="bookmark-actions">
+          <button id="export-bookmarks" class="button button-secondary">Exportar JSON</button>
+          <label class="button button-secondary" for="import-bookmarks">Importar JSON</label>
+          <input id="import-bookmarks" type="file" accept="application/json,.json" hidden />
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Concebido e desenvolvido por <strong>Marcus Guedes</strong> · 2026</p>
+      <p>Experiência educacional sobre uma obra literária em domínio público.</p>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
