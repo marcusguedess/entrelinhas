@@ -1,0 +1,22 @@
+{
+  "name": "entrelinhas-audiobook-pwa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "catalog": "python tools/audiobook.py catalog",
+    "icons": "python tools/generate_icons.py",
+    "transcripts": "python tools/md_to_vtt.py",
+    "validate": "python tools/audiobook.py validate",
+    "serve": "python tools/audiobook.py serve",
+    "screenshots": "node tools/capture_screenshots.mjs",
+    "test": "python -m unittest discover -s tests",
+    "test:e2e": "playwright test",
+    "lint": "eslint Entrelinhas/js Entrelinhas/sw.js tests/e2e tools playwright.config.js --ext .js,.mjs",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.0",
+    "eslint": "^8.50.0",
+    "prettier": "^2.8.8"
+  }
+}

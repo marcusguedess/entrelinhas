@@ -1,0 +1,118 @@
+{
+  "book": {
+    "title": "Dom Casmurro",
+    "author": "Machado de Assis"
+  },
+  "chapters": [
+    {
+      "id": "capitulo-01",
+      "number": 1,
+      "title": "Capítulos 1 a 5",
+      "audio": "./audios/1.mp3",
+      "transcript": "./transcripts/secao-01.vtt",
+      "chapterStart": 1,
+      "chapterEnd": 5,
+      "durationSeconds": 1192,
+      "durationLabel": "20 min"
+    },
+    {
+      "id": "capitulo-02",
+      "number": 2,
+      "title": "Capítulos 6 a 10",
+      "audio": "./audios/2.mp3",
+      "transcript": "./transcripts/secao-02.vtt",
+      "chapterStart": 6,
+      "chapterEnd": 10,
+      "durationSeconds": 987,
+      "durationLabel": "16 min"
+    },
+    {
+      "id": "capitulo-03",
+      "number": 3,
+      "title": "Capítulos 11 a 15",
+      "audio": "./audios/3.mp3",
+      "transcript": "./transcripts/secao-03.vtt",
+      "chapterStart": 11,
+      "chapterEnd": 15,
+      "durationSeconds": 1456,
+      "durationLabel": "24 min"
+    },
+    {
+      "id": "capitulo-04",
+      "number": 4,
+      "title": "Capítulos 16 a 20",
+      "audio": "./audios/4.mp3",
+      "transcript": "./transcripts/secao-04.vtt",
+      "chapterStart": 16,
+      "chapterEnd": 20,
+      "durationSeconds": 1376,
+      "durationLabel": "23 min"
+    },
+    {
+      "id": "capitulo-05",
+      "number": 5,
+      "title": "Capítulos 21 a 25",
+      "audio": "./audios/5.mp3",
+      "transcript": "./transcripts/secao-05.vtt",
+      "chapterStart": 21,
+      "chapterEnd": 25,
+      "durationSeconds": 978,
+      "durationLabel": "16 min"
+    },
+    {
+      "id": "capitulo-06",
+      "number": 6,
+      "title": "Capítulos 26 a 30",
+      "audio": "./audios/6.mp3",
+      "transcript": "./transcripts/secao-06.vtt",
+      "chapterStart": 26,
+      "chapterEnd": 30,
+      "durationSeconds": 956,
+      "durationLabel": "16 min"
+    },
+    {
+      "id": "capitulo-07",
+      "number": 7,
+      "title": "Capítulos 31 a 35",
+      "audio": "./audios/7.mp3",
+      "transcript": "./transcripts/secao-07.vtt",
+      "chapterStart": 31,
+      "chapterEnd": 35,
+      "durationSeconds": 1904,
+      "durationLabel": "32 min"
+    },
+    {
+      "id": "capitulo-08",
+      "number": 8,
+      "title": "Capítulos 36 a 40",
+      "audio": "./audios/8.mp3",
+      "transcript": "./transcripts/secao-08.vtt",
+      "chapterStart": 36,
+      "chapterEnd": 40,
+      "durationSeconds": 959,
+      "durationLabel": "16 min"
+    },
+    {
+      "id": "capitulo-09",
+      "number": 9,
+      "title": "Capítulos 41 a 45",
+      "audio": "./audios/9.mp3",
+      "transcript": "./transcripts/secao-09.vtt",
+      "chapterStart": 41,
+      "chapterEnd": 45,
+      "durationSeconds": 1343,
+      "durationLabel": "22 min"
+    },
+    {
+      "id": "capitulo-10",
+      "number": 10,
+      "title": "Capítulos 46 a 50",
+      "audio": "./audios/10.mp3",
+      "transcript": "./transcripts/secao-10.vtt",
+      "chapterStart": 46,
+      "chapterEnd": 50,
+      "durationSeconds": 720,
+      "durationLabel": "12 min"
+    }
+  ]
+}

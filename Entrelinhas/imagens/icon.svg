@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Livro aberto">
+  <rect width="512" height="512" rx="96" fill="#2f241f"/>
+  <path d="M72 126c70-15 128 2 184 48v252c-54-44-112-62-184-46V126Z" fill="#fffdf8"/>
+  <path d="M440 126c-70-15-128 2-184 48v252c54-44 112-62 184-46V126Z" fill="#eadfce"/>
+  <path d="M256 174v252" stroke="#bf8b3d" stroke-width="18"/>
+  <path d="M108 196c43-3 78 8 112 30M108 252c43-3 78 8 112 30M404 196c-43-3-78 8-112 30M404 252c-43-3-78 8-112 30" fill="none" stroke="#7a3225" stroke-linecap="round" stroke-width="14"/>
+</svg>
