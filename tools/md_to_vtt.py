@@ -68,7 +68,7 @@ def convert(number: int) -> Path:
 def main() -> int:
     for number in range(1, 11):
         target = convert(number)
-        print(f"Gerado {target.relative_to(ROOT)}")
+        print(f"Criado {target.relative_to(ROOT)}")
     return 0
 
 

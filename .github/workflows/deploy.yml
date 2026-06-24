@@ -44,6 +44,12 @@ jobs:
           python -m unittest discover -s tests
           npm run lint
 
+      - name: Install browser for end-to-end tests
+        run: npx playwright install --with-deps chrome
+
+      - name: Run end-to-end tests
+        run: npm run test:e2e
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -10,9 +10,9 @@
     <meta name="theme-color" content="#2f241f" />
     <meta
       name="description"
-      content="Entrelinhas é uma estante inteligente de audiobooks para ouvir, importar arquivos, salvar progresso e criar marcadores. Dom Casmurro é a obra demonstrativa hospedada pelo projeto."
+      content="Entrelinhas é uma estante pessoal de audiobooks para ouvir, importar arquivos, salvar progresso e criar marcadores. Dom Casmurro é a obra demonstrativa hospedada pelo projeto."
     />
-    <title>Entrelinhas — Estante inteligente de audiobooks</title>
+    <title>Entrelinhas — Estante pessoal de audiobooks</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="manifest" href="./manifest.json" />
     <link rel="icon" href="./imagens/dom-casmurro.jpeg" />
@@ -24,10 +24,21 @@
     <header class="site-header">
       <a class="brand" href="./" aria-label="Página inicial">Entrelinhas</a>
       <div class="header-actions" aria-label="Preferências do aplicativo">
-        <button id="help-open" class="icon-toggle" type="button" aria-label="Como usar o Entrelinhas">
+        <button
+          id="help-open"
+          class="icon-toggle"
+          type="button"
+          aria-label="Como usar o Entrelinhas"
+        >
           <span aria-hidden="true">?</span>
         </button>
-        <button id="theme-toggle" class="icon-toggle" type="button" aria-label="Ativar modo noturno" aria-pressed="false">
+        <button
+          id="theme-toggle"
+          class="icon-toggle"
+          type="button"
+          aria-label="Ativar modo noturno"
+          aria-pressed="false"
+        >
           <span aria-hidden="true">☾</span>
         </button>
         <button id="install-app" class="button button-secondary" hidden>Instalar aplicativo</button>
@@ -48,17 +59,25 @@
 
         <div class="hero-copy">
           <p class="status-pill">Projeto gratuito em desenvolvimento</p>
-          <p class="eyebrow">Estante inteligente de audiobooks</p>
+          <p class="eyebrow">Estante pessoal de audiobooks</p>
           <h1 id="app-title">Entrelinhas</h1>
           <p class="author">Ouça, organize e continue seus audiobooks no ponto exato.</p>
           <p class="summary">
-            O Entrelinhas é um aplicativo web para receber audiobooks, reproduzir seções,
-            salvar progresso automaticamente e guardar marcadores. Para demonstrar a experiência,
+            O Entrelinhas é um aplicativo web para receber audiobooks, reproduzir seções, salvar
+            progresso automaticamente e guardar marcadores. Para demonstrar a experiência,
             hospedamos uma amostra de <strong>Dom Casmurro</strong> pronta para escuta.
           </p>
           <p class="signature">Experiência criada por <strong>Marcus Guedes</strong></p>
           <div class="feature-list" aria-label="Recursos principais">
-            <span>Importe seus áudios</span><span>Progresso local</span><span>Marcadores</span><span>Modo offline</span>
+            <span>Importe seus áudios</span><span>Progresso local</span><span>Marcadores</span
+            ><span>Modo offline</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#player">Experimentar a amostra</a>
+            <a class="button button-secondary" href="#import-title">Importar meu audiobook</a>
+            <button id="transcript-guide-open" class="text-button" type="button">
+              Como funcionam as transcrições?
+            </button>
           </div>
         </div>
       </section>
@@ -71,11 +90,16 @@
         <div class="about-grid">
           <article>
             <h3>1. Experimente a amostra</h3>
-            <p>Use Dom Casmurro para testar o player, os controles, a transcrição e os marcadores.</p>
+            <p>
+              Use Dom Casmurro para testar o player, os controles, a transcrição e os marcadores.
+            </p>
           </article>
           <article>
             <h3>2. Importe sua biblioteca</h3>
-            <p>Adicione arquivos de áudio do seu dispositivo. Eles ficam salvos localmente no navegador.</p>
+            <p>
+              Adicione arquivos de áudio do seu dispositivo. Eles ficam salvos localmente no
+              navegador.
+            </p>
           </article>
           <article>
             <h3>3. Continue entre sessões</h3>
@@ -84,8 +108,17 @@
         </div>
       </section>
 
+      <nav class="app-nav" aria-label="Áreas do aplicativo">
+        <a href="#library-section"><span aria-hidden="true">▦</span>Biblioteca</a>
+        <a href="#player"><span aria-hidden="true">▶</span>Reproduzindo</a>
+        <a href="#transcript-panel"><span aria-hidden="true">¶</span>Texto</a>
+        <a href="#bookmarks"><span aria-hidden="true">◆</span>Marcadores</a>
+      </nav>
+
       <section id="player" class="player-card" aria-labelledby="chapter-title">
-        <p class="demo-label">Demonstração hospedada: Dom Casmurro, de Machado de Assis</p>
+        <p id="book-context" class="demo-label">
+          Demonstração hospedada: Dom Casmurro, de Machado de Assis
+        </p>
         <audio id="audio" preload="metadata"></audio>
 
         <div class="now-playing">
@@ -147,32 +180,41 @@
         <div class="player-controls" aria-label="Controles de reprodução">
           <button id="previous" class="icon-button" aria-label="Seção anterior">⏮</button>
           <button id="backward" class="icon-button" aria-label="Voltar 15 segundos">−15</button>
-          <button id="play" class="play-button" aria-label="Reproduzir" aria-pressed="false">▶</button>
+          <button id="play" class="play-button" aria-label="Reproduzir" aria-pressed="false">
+            ▶
+          </button>
           <button id="forward" class="icon-button" aria-label="Avançar 15 segundos">+15</button>
           <button id="next" class="icon-button" aria-label="Próxima seção">⏭</button>
         </div>
 
-        <div class="player-options">
-          <label for="speed">Velocidade</label>
-          <select id="speed">
-            <option value="0.75">0,75×</option>
-            <option value="1" selected>1×</option>
-            <option value="1.25">1,25×</option>
-            <option value="1.5">1,5×</option>
-            <option value="2">2×</option>
-          </select>
-          <label class="volume-control" for="volume">
-            <span id="volume-label">Volume 100%</span>
-            <input id="volume" type="range" min="0" max="1" value="1" step="0.05" />
-          </label>
-          <button id="mute" class="button button-secondary" aria-pressed="false">Silenciar</button>
-          <button id="download" class="button button-secondary">Salvar para ouvir offline</button>
-          <button id="focus-mode" class="button button-secondary" aria-pressed="false">Modo escuta</button>
-        </div>
+        <details class="player-more" open>
+          <summary>Mais opções de reprodução</summary>
+          <div class="player-options">
+            <label for="speed">Velocidade</label>
+            <select id="speed">
+              <option value="0.75">0,75×</option>
+              <option value="1" selected>1×</option>
+              <option value="1.25">1,25×</option>
+              <option value="1.5">1,5×</option>
+              <option value="2">2×</option>
+            </select>
+            <label class="volume-control" for="volume">
+              <span id="volume-label">Volume 100%</span>
+              <input id="volume" type="range" min="0" max="1" value="1" step="0.05" />
+            </label>
+            <button id="mute" class="button button-secondary" aria-pressed="false">
+              Silenciar
+            </button>
+            <button id="download" class="button button-secondary">Salvar para ouvir offline</button>
+            <button id="focus-mode" class="button button-secondary" aria-pressed="false">
+              Modo escuta
+            </button>
+          </div>
+        </details>
       </section>
 
       <div class="content-grid">
-        <section class="panel import-panel" aria-labelledby="import-title">
+        <section id="library-section" class="panel import-panel" aria-labelledby="import-title">
           <div class="section-heading">
             <div>
               <p class="eyebrow">Sua biblioteca</p>
@@ -180,24 +222,84 @@
             </div>
           </div>
           <p class="panel-intro">
-            Selecione seções em áudio do seu dispositivo para transformar o navegador em uma estante de escuta privada.
-            Os arquivos não são enviados para servidor.
+            Selecione seções em áudio do seu dispositivo para transformar o navegador em uma estante
+            de escuta privada. Os arquivos não são enviados para servidor.
           </p>
+          <div class="transcript-notice">
+            <div>
+              <strong>Transcrição é opcional</strong>
+              <p>
+                O Entrelinhas reproduz seus áudios, mas não cria transcrições. Se você já tiver
+                arquivos <code>.vtt</code> ou <code>.md</code>, importe-os junto com as faixas.
+              </p>
+            </div>
+            <button id="transcript-guide-inline" class="button button-secondary" type="button">
+              Entender transcrições
+            </button>
+          </div>
+          <ol class="import-steps" aria-label="Etapas da importação">
+            <li><strong>1.</strong> Dê um nome ao livro.</li>
+            <li><strong>2.</strong> Selecione as faixas de áudio.</li>
+            <li>
+              <strong>3.</strong> Opcionalmente, selecione transcrições com nomes correspondentes.
+            </li>
+          </ol>
           <form id="library-form" class="library-form">
             <label for="library-title">Título</label>
             <input id="library-title" maxlength="80" placeholder="Ex.: Meu audiobook" />
             <label for="library-author">Autor ou narrador</label>
             <input id="library-author" maxlength="80" placeholder="Opcional" />
-            <label for="library-files">Áudios e transcrições</label>
-            <input id="library-files" type="file" accept="audio/*,.vtt,.md,text/vtt,text/markdown,text/plain" multiple />
-            <button class="button button-primary" type="submit">Adicionar à biblioteca local</button>
+            <label for="library-files">Faixas de áudio e transcrições opcionais</label>
+            <input
+              id="library-files"
+              type="file"
+              accept="audio/*,.vtt,.md,text/vtt,text/markdown,text/plain"
+              multiple
+            />
+            <p class="field-help">
+              Para associar arquivos, use o mesmo nome: <code>01.mp3</code> + <code>01.vtt</code>.
+            </p>
+            <div id="import-preview" class="import-preview" aria-live="polite" hidden>
+              <p id="import-summary"></p>
+              <ul id="import-file-list"></ul>
+            </div>
+            <button class="button button-primary" type="submit">
+              Adicionar à biblioteca local
+            </button>
           </form>
           <p class="privacy-note">
-            Os arquivos importados ficam neste dispositivo. Nada é enviado para servidor.
+            Os arquivos importados ficam neste navegador. Nada é enviado para servidor. Limpar os
+            dados do site pode apagar a biblioteca.
           </p>
+          <section class="local-library" aria-labelledby="local-library-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Neste dispositivo</p>
+                <h3 id="local-library-title">Livros importados</h3>
+              </div>
+              <button id="refresh-storage" class="text-button" type="button">
+                Atualizar espaço
+              </button>
+            </div>
+            <div class="storage-summary" aria-live="polite">
+              <div>
+                <span class="metric-label">Biblioteca local</span>
+                <strong id="library-storage">Calculando…</strong>
+              </div>
+              <div>
+                <span class="metric-label">Armazenamento do navegador</span>
+                <strong id="browser-storage">Calculando…</strong>
+              </div>
+              <div>
+                <span class="metric-label">Proteção contra limpeza automática</span>
+                <strong id="storage-persistence">Verificando…</strong>
+              </div>
+            </div>
+            <ul id="local-book-list" class="local-book-list"></ul>
+          </section>
         </section>
 
-        <section class="panel" aria-labelledby="chapters-title">
+        <section id="chapters-panel" class="panel" aria-labelledby="chapters-title">
           <div class="section-heading">
             <div>
               <p class="eyebrow">Navegação</p>
@@ -208,22 +310,42 @@
           <ol id="chapter-list" class="chapter-list"></ol>
         </section>
 
-        <section class="panel" aria-labelledby="transcript-title">
+        <section
+          id="transcript-panel"
+          class="panel transcript-panel"
+          aria-labelledby="transcript-title"
+        >
           <div class="section-heading">
             <div>
               <p class="eyebrow">Acompanhe o texto</p>
               <h2 id="transcript-title">Transcrição</h2>
             </div>
-            <label class="transcript-search" for="transcript-search">
-              <span>Buscar</span>
-              <input id="transcript-search" type="search" placeholder="Palavra ou trecho" autocomplete="off" />
-            </label>
+            <div class="transcript-tools">
+              <div class="reading-controls" aria-label="Preferências de leitura">
+                <button id="transcript-smaller" type="button" aria-label="Diminuir texto">
+                  A−
+                </button>
+                <button id="transcript-larger" type="button" aria-label="Aumentar texto">A+</button>
+                <button id="transcript-follow" type="button" aria-pressed="true">
+                  Seguir áudio
+                </button>
+              </div>
+              <label class="transcript-search" for="transcript-search">
+                <span>Buscar</span>
+                <input
+                  id="transcript-search"
+                  type="search"
+                  placeholder="Palavra ou trecho"
+                  autocomplete="off"
+                />
+              </label>
+            </div>
           </div>
           <div id="transcript" class="transcript" tabindex="0"></div>
         </section>
       </div>
 
-      <section class="panel bookmarks-panel" aria-labelledby="bookmarks-title">
+      <section id="bookmarks" class="panel bookmarks-panel" aria-labelledby="bookmarks-title">
         <div class="section-heading">
           <div>
             <p class="eyebrow">Sua leitura</p>
@@ -254,6 +376,30 @@
       <p>Experiência educacional sobre uma obra literária em domínio público.</p>
     </footer>
 
+    <aside id="mini-player" class="mini-player" aria-label="Player compacto" hidden>
+      <button id="mini-player-open" class="mini-cover" type="button" aria-label="Abrir player">
+        <img
+          id="mini-cover-image"
+          src="./imagens/dom-casmurro.jpeg"
+          alt=""
+          width="48"
+          height="64"
+        />
+      </button>
+      <div class="mini-copy">
+        <strong id="mini-title">Carregando…</strong>
+        <span id="mini-time">0:00 de 0:00</span>
+        <span class="mini-progress" aria-hidden="true"><span id="mini-progress-value"></span></span>
+      </div>
+      <button id="mini-backward" class="mini-action" type="button" aria-label="Voltar 15 segundos">
+        −15
+      </button>
+      <button id="mini-play" class="mini-play" type="button" aria-label="Reproduzir">▶</button>
+      <button id="mini-forward" class="mini-action" type="button" aria-label="Avançar 15 segundos">
+        +15
+      </button>
+    </aside>
+
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
     <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title">
       <div class="help-panel">
@@ -273,7 +419,9 @@
           </li>
           <li>
             <strong>Importe seus áudios</strong>
-            <span>Selecione arquivos do seu dispositivo. Eles ficam salvos só neste navegador.</span>
+            <span
+              >Selecione arquivos do seu dispositivo. Eles ficam salvos só neste navegador.</span
+            >
           </li>
           <li>
             <strong>Continue depois</strong>
@@ -286,6 +434,113 @@
         </ol>
         <p class="help-privacy">
           O Entrelinhas não exige conta e não envia sua biblioteca importada para servidor.
+        </p>
+      </div>
+    </dialog>
+    <dialog id="welcome-dialog" class="help-dialog welcome-dialog" aria-labelledby="welcome-title">
+      <div class="help-panel welcome-panel">
+        <p class="eyebrow">Bem-vindo ao Entrelinhas</p>
+        <h2 id="welcome-title">Ouça seus audiobooks sem enviar arquivos para a internet</h2>
+        <div class="welcome-steps">
+          <article>
+            <span>1</span>
+            <h3>Experimente</h3>
+            <p>Conheça o player usando a amostra de Dom Casmurro.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Importe</h3>
+            <p>Adicione as faixas de áudio armazenadas no seu dispositivo.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Continue depois</h3>
+            <p>Progresso, preferências e marcadores ficam salvos neste navegador.</p>
+          </article>
+        </div>
+        <p class="welcome-note">
+          A transcrição não é obrigatória e não é criada pelo Entrelinhas. Você pode adicionar um
+          arquivo <code>.vtt</code> ou <code>.md</code> caso já tenha o texto.
+        </p>
+        <div class="welcome-actions">
+          <button id="welcome-sample" class="button button-primary" type="button">
+            Experimentar Dom Casmurro
+          </button>
+          <button id="welcome-import" class="button button-secondary" type="button">
+            Importar meu audiobook
+          </button>
+          <button id="welcome-skip" class="text-button" type="button">Ver a página primeiro</button>
+        </div>
+      </div>
+    </dialog>
+    <dialog
+      id="transcript-guide"
+      class="help-dialog transcript-guide"
+      aria-labelledby="transcript-guide-title"
+    >
+      <div class="help-panel guide-panel">
+        <div class="help-heading">
+          <div>
+            <p class="eyebrow">Guia de transcrições</p>
+            <h2 id="transcript-guide-title">O texto é opcional e vem de fora do Entrelinhas</h2>
+          </div>
+          <button
+            id="transcript-guide-close"
+            class="icon-toggle"
+            type="button"
+            aria-label="Fechar guia de transcrições"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="guide-grid">
+          <section>
+            <h3>O aplicativo transcreve o áudio?</h3>
+            <p>
+              Não. O site é hospedado no GitHub Pages e não possui servidor para processar áudio.
+              Seus arquivos permanecem no dispositivo.
+            </p>
+          </section>
+          <section>
+            <h3>Preciso de uma transcrição?</h3>
+            <p>
+              Não. O audiobook funciona normalmente sem texto. A transcrição é um recurso
+              complementar para acompanhar ou pesquisar o conteúdo.
+            </p>
+          </section>
+          <section>
+            <h3>Qual formato devo usar?</h3>
+            <p>
+              Use <code>.vtt</code> para texto sincronizado com o áudio. Use <code>.md</code>
+              para um texto de leitura sem sincronização temporal.
+            </p>
+          </section>
+          <section>
+            <h3>Como associar os arquivos?</h3>
+            <p>Selecione áudio e texto juntos, usando nomes correspondentes:</p>
+            <pre aria-label="Exemplo de nomes de arquivos">
+01.mp3 + 01.vtt
+02.mp3 + 02.md</pre
+            >
+          </section>
+          <section>
+            <h3>Onde consigo o texto?</h3>
+            <p>
+              Obras legalmente disponíveis podem ter textos em bibliotecas digitais. Um texto
+              integral ainda precisa ser convertido ou sincronizado para virar WebVTT.
+            </p>
+          </section>
+          <section>
+            <h3>Como gerar uma transcrição?</h3>
+            <p>
+              Use uma ferramenta externa ou local que exporte VTT. Serviços online recebem seu
+              áudio; confira a política de privacidade antes de usar.
+            </p>
+          </section>
+        </div>
+        <p class="guide-footnote">
+          O importante é manter áudio e texto com nomes correspondentes para que o pareamento seja
+          simples e previsível.
         </p>
       </div>
     </dialog>

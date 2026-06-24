@@ -1,4 +1,4 @@
-# Entrelinhas — Estante inteligente de audiobooks
+# Entrelinhas — Estante pessoal de audiobooks
 
 Entrelinhas é um aplicativo web instalável para ouvir, organizar e retomar audiobooks. Ele funciona como uma estante privada no navegador: o usuário pode experimentar uma obra demonstrativa hospedada pelo projeto, importar seus próprios arquivos de áudio, salvar progresso por seção e criar marcadores.
 
@@ -30,6 +30,9 @@ A ideia nasceu durante um intensivão de JavaScript, inicialmente como um player
 - Modo noturno e modo escuta.
 - Ajuda integrada com instruções rápidas de uso e privacidade local.
 - Importação local de audiobooks e transcrições `.vtt` ou `.md` via IndexedDB.
+- Biblioteca local em cards, com abertura por livro, exclusão e estimativa de armazenamento.
+- Miniplayer responsivo para continuar controlando o áudio durante a navegação.
+- Ajuste do tamanho da transcrição e controle para seguir o trecho reproduzido.
 - Modo offline via Service Worker para app shell e seções selecionadas em produção.
 - Servidor Python local com cabeçalhos de segurança.
 - Validador Python para catálogo, caminhos de mídia e transcrições.
@@ -109,7 +112,7 @@ Coloque os arquivos em:
 Entrelinhas/transcripts/
 ```
 
-Cada arquivo de áudio da amostra é uma seção, e cada seção contém vários capítulos literários. Os arquivos públicos gerados usam o número da seção:
+Cada arquivo de áudio da amostra é uma seção, e cada seção contém vários capítulos literários. Os arquivos públicos usam o número da seção:
 
 ```text
 Entrelinhas/transcripts/secao-01.vtt
@@ -216,7 +219,7 @@ Checklist antes de subir:
 
 - confirme a origem/licença dos arquivos em `Entrelinhas/audios/` e `Entrelinhas/imagens/`;
 - rode validação e testes;
-- confira se nenhum arquivo gerado (`__pycache__`, logs, `node_modules`) foi versionado;
+- confira se nenhum artefato local (`__pycache__`, logs, `node_modules`) foi versionado;
 - em Settings > Pages do repositório, use GitHub Actions ou a branch `gh-pages`, conforme a configuração do repositório;
 - depois do primeiro deploy, teste a URL pública em aba anônima para validar Service Worker, áudio e transcrições.
 - na URL pública, confira também o botão “?”, o botão de instalação do PWA e o salvamento offline de uma seção.
@@ -232,6 +235,9 @@ Checklist antes de subir:
 - O projeto não coleta dados do usuário e não tem backend próprio nesta versão.
 
 ## Roadmap
+
+O roadmap detalhado de produto, biblioteca, importação, transcrições, UI/UX e testes está em
+[`docs/UX_ROADMAP.md`](docs/UX_ROADMAP.md).
 
 - Revisar tempos reais das transcrições `.vtt` com alinhamento mais preciso.
 - Permitir edição visual da ordem e dos nomes das seções importadas.

@@ -13,10 +13,16 @@ export function parseVtt(source) {
     const lines = block.split(/\r?\n/).filter(Boolean);
     const timingIndex = lines.findIndex((line) => line.includes('-->'));
     if (timingIndex === -1) return [];
-    const [rawStart, rawEnd] = lines[timingIndex].split('-->').map((part) => part.trim().split(/\s+/)[0]);
+    const [rawStart, rawEnd] = lines[timingIndex]
+      .split('-->')
+      .map((part) => part.trim().split(/\s+/)[0]);
     const start = timestampToSeconds(rawStart);
     const end = timestampToSeconds(rawEnd);
-    const text = lines.slice(timingIndex + 1).join(' ').replace(/<[^>]*>/g, '').trim();
+    const text = lines
+      .slice(timingIndex + 1)
+      .join(' ')
+      .replace(/<[^>]*>/g, '')
+      .trim();
     if (start === null || end === null || end <= start || !text) return [];
     return [{ start, end, text: text.slice(0, 1000) }];
   });
@@ -38,13 +44,20 @@ export function parseMarkdown(source) {
     .map(stripMarkdown)
     .filter(Boolean)
     .slice(0, 300)
-    .map((text) => ({ start: 0, end: Number.POSITIVE_INFINITY, text: text.slice(0, 1000), untimed: true }));
+    .map((text) => ({
+      start: 0,
+      end: Number.POSITIVE_INFINITY,
+      text: text.slice(0, 1000),
+      untimed: true,
+    }));
 }
 
-export async function loadTranscript(path) {
+export async function loadTranscript(path, kind = '') {
   if (!path) return [];
   const response = await fetch(path, { credentials: 'same-origin' });
   if (!response.ok) throw new Error(`Transcrição indisponível (${response.status})`);
   const source = await response.text();
-  return /\.md(?:$|[?#])/i.test(path) ? parseMarkdown(source) : parseVtt(source);
+  return kind === 'markdown' || /\.md(?:$|[?#])/i.test(path)
+    ? parseMarkdown(source)
+    : parseVtt(source);
 }

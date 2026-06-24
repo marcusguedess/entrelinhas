@@ -7,6 +7,8 @@ const KEYS = Object.freeze({
   bookmarks: 'entrelinhas.bookmarks.v2',
   theme: 'entrelinhas.theme.v1',
   focus: 'entrelinhas.focus.v1',
+  welcome: 'entrelinhas.welcome.v1',
+  transcriptSize: 'entrelinhas.transcript-size.v1',
 });
 
 function isSafeId(id) {
@@ -66,6 +68,35 @@ export function savePosition(id, seconds) {
   localStorage.setItem(KEYS.positions, JSON.stringify(positions));
 }
 
+export function savePositions(values) {
+  const positions = {};
+  if (values && typeof values === 'object' && !Array.isArray(values)) {
+    Object.entries(values).forEach(([id, value]) => {
+      if (isSafeId(id)) positions[id] = finiteNumber(value);
+    });
+  }
+  localStorage.setItem(KEYS.positions, JSON.stringify(positions));
+  return positions;
+}
+
+export function removeChapterData(chapterIds) {
+  const ids = new Set(Array.isArray(chapterIds) ? chapterIds.filter(isSafeId) : []);
+  if (!ids.size) return;
+
+  const positions = getPlayerState().positions;
+  const listening = readListening();
+  ids.forEach((id) => {
+    delete positions[id];
+    delete listening[id];
+  });
+  localStorage.setItem(KEYS.positions, JSON.stringify(positions));
+  localStorage.setItem(KEYS.listening, JSON.stringify(listening));
+
+  const bookmarks = loadBookmarks().filter((bookmark) => !ids.has(bookmark.chapterId));
+  localStorage.setItem(KEYS.bookmarks, JSON.stringify(bookmarks));
+  if (ids.has(localStorage.getItem(KEYS.chapter))) localStorage.removeItem(KEYS.chapter);
+}
+
 export function saveSpeed(speed) {
   const safeSpeed = Math.min(2, Math.max(0.75, finiteNumber(speed, 1)));
   localStorage.setItem(KEYS.speed, String(safeSpeed));
@@ -77,12 +108,12 @@ export function saveVolume(volume) {
 }
 
 export function loadPreference(key, fallback = '') {
-  if (!['theme', 'focus'].includes(key)) return fallback;
+  if (!['theme', 'focus', 'welcome', 'transcriptSize'].includes(key)) return fallback;
   return localStorage.getItem(KEYS[key]) || fallback;
 }
 
 export function savePreference(key, value) {
-  if (!['theme', 'focus'].includes(key)) return;
+  if (!['theme', 'focus', 'welcome', 'transcriptSize'].includes(key)) return;
   localStorage.setItem(KEYS[key], String(value));
 }
 
@@ -99,12 +130,15 @@ export function validateBookmark(value) {
   const chapterId = String(value.chapterId || '');
   if (!isSafeId(chapterId)) return null;
   return {
-    id: typeof value.id === 'string' && /^[a-f0-9-]{16,64}$/i.test(value.id)
-      ? value.id
-      : crypto.randomUUID(),
+    id:
+      typeof value.id === 'string' && /^[a-f0-9-]{16,64}$/i.test(value.id)
+        ? value.id
+        : crypto.randomUUID(),
     chapterId,
     time: finiteNumber(value.time),
-    note: String(value.note || '').trim().slice(0, 120),
+    note: String(value.note || '')
+      .trim()
+      .slice(0, 120),
     createdAt: /^\d{4}-\d{2}-\d{2}T/.test(String(value.createdAt || ''))
       ? String(value.createdAt)
       : new Date().toISOString(),

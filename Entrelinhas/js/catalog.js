@@ -21,7 +21,9 @@ function parseChapter(value, index) {
     transcript: transcript && TRANSCRIPT_EXTENSIONS.test(transcript) ? transcript : null,
     chapterStart: Number.isInteger(Number(value.chapterStart)) ? Number(value.chapterStart) : null,
     chapterEnd: Number.isInteger(Number(value.chapterEnd)) ? Number(value.chapterEnd) : null,
-    durationSeconds: Number.isFinite(Number(value.durationSeconds)) ? Number(value.durationSeconds) : null,
+    durationSeconds: Number.isFinite(Number(value.durationSeconds))
+      ? Number(value.durationSeconds)
+      : null,
     durationLabel: String(value.durationLabel || '').slice(0, 24),
   };
 }

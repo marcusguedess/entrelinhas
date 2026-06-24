@@ -1,4 +1,4 @@
-const VERSION = 'v6';
+const VERSION = 'v8';
 const SHELL_CACHE = `entrelinhas-shell-${VERSION}`;
 const MEDIA_CACHE = `entrelinhas-media-${VERSION}`;
 const SHELL = [
@@ -116,14 +116,25 @@ self.addEventListener('message', (event) => {
   const assets = event.data.assets.filter(isSafeAsset).slice(0, 3);
   event.waitUntil(
     caches.open(MEDIA_CACHE).then(async (cache) => {
+      let cached = 0;
       for (const asset of assets) {
         try {
           const response = await fetch(asset, { credentials: 'same-origin' });
-          if (response.ok) await cache.put(asset, response);
+          if (response.ok) {
+            await cache.put(asset, response);
+            cached += 1;
+          }
         } catch {
-          // A interface informa indisponibilidade; o worker permanece operacional.
+          // O resultado agregado é enviado à interface no fim da operação.
         }
       }
+      event.source?.postMessage({
+        type: 'CACHE_CHAPTER_RESULT',
+        requestId: event.data.requestId,
+        ok: assets.length > 0 && cached === assets.length,
+        cached,
+        total: assets.length,
+      });
     })
   );
 });
