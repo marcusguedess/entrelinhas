@@ -1,7 +1,19 @@
 {
   "name": "entrelinhas-audiobook-pwa",
   "version": "1.0.0",
+  "description": "PWA local-first para ouvir, organizar e retomar audiobooks no navegador.",
   "private": true,
+  "homepage": "https://marcusguedess.github.io/entrelinhas/",
+  "author": "Marcus Guedes",
+  "license": "MIT",
+  "keywords": [
+    "audiobook",
+    "pwa",
+    "local-first",
+    "indexeddb",
+    "webvtt",
+    "github-pages"
+  ],
   "scripts": {
     "catalog": "python tools/audiobook.py catalog",
     "icons": "python tools/generate_icons.py",
